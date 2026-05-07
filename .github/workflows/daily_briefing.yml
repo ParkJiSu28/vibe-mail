@@ -1,0 +1,39 @@
+name: 일일 주식 브리핑
+
+on:
+  schedule:
+    # 매일 06:00 KST = 전날 21:00 UTC (월~금 KST = 일~목 UTC 기준)
+    - cron: '0 21 * * 0-4'
+  workflow_dispatch:  # GitHub Actions 탭에서 수동 테스트용 버튼 (선택)
+
+jobs:
+  send-briefing:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      KRX_ID: ${{ secrets.KRX_ID }}
+      KRX_PW: ${{ secrets.KRX_PW }}
+      EMAIL_TO: ${{ vars.EMAIL_TO }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: 한글 폰트 설치
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y fonts-nanum
+
+      - name: 패키지 설치
+        run: pip install -r requirements.txt
+
+      - name: logs 디렉토리 생성
+        run: mkdir -p logs
+
+      - name: 브리핑 실행
+        run: python main.py
