@@ -2,8 +2,10 @@ name: 일일 주식 브리핑
 
 on:
   schedule:
-    # 매일 06:00 KST = 전날 21:00 UTC (월~금 KST = 일~목 UTC 기준)
-    - cron: '0 21 * * 0-4'
+    # 화~금 06:00 KST = 전날 21:00 UTC (월~목 UTC)
+    # 전날(KST)이 국내 시장 개장일인 경우에만 메일 발송 (main.py 내부에서 pandas_market_calendars로 재확인)
+    # 일요일 UTC(= 월요일 KST)는 제외: 전날이 일요일이므로 항상 휴장 → 불필요한 실행 스킵
+    - cron: '0 21 * * 1-4'
   workflow_dispatch:  # GitHub Actions 탭에서 수동 테스트용 버튼 (선택)
 
 jobs:

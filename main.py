@@ -78,9 +78,9 @@ def _send_with_cid(user: str, password: str, to: list[str],
 def main():
     logger.info("=== 일일 주식 브리핑 시작 ===")
 
-    # 거래일 확인 (한국 또는 미국 시장 열리는 날만 발송)
+    # 거래일 확인 (어제 국내 시장이 개장한 날만 발송)
     if not _is_market_day():
-        logger.info("오늘은 거래일이 아닙니다 (한국/미국 휴장). 발송 건너뜀.")
+        logger.info("어제 국내 시장(XKRX)이 휴장일이므로 발송을 건너뜁니다.")
         sys.exit(0)
 
     # 1. 주식 데이터 수집
