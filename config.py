@@ -57,6 +57,10 @@ _env_to = os.getenv("EMAIL_TO", "")
 EMAIL_TO = [e.strip() for e in _env_to.split(",") if e.strip()] or [
     "qkrwltn28@gmail.com",
     "chelseaj960126@gmail.com",
+    "dmstn7185@naver.com",
+    "barabajuo@hanmail.net",
+    "yakyok@hanmail.net",
+    "totori1905@gmail.com",
 ]
 
 # ── 기타 설정 ────────────────────────────────────────────────────────
