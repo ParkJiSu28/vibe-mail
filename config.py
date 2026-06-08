@@ -59,7 +59,6 @@ EMAIL_TO = [e.strip() for e in _env_to.split(",") if e.strip()] or [
     "chelseaj960126@gmail.com",
     "dmstn7185@naver.com",
     "barabajuo@hanmail.net",
-    "yakyok@hanmail.net",
     "totori1905@gmail.com",
 ]
 
